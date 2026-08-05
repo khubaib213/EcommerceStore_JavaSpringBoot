@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.exception;
 
 import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;

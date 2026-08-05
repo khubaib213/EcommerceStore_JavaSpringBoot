@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.security;
 
 
 import io.jsonwebtoken.Claims;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
-
-import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
 
 @Service
 public class JwtService {

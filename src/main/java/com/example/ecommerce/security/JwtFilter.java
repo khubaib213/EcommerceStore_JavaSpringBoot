@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.security;
 
 
 import jakarta.servlet.FilterChain;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.rmi.server.ServerCloneException;
 import java.util.List;
 
 @Component
