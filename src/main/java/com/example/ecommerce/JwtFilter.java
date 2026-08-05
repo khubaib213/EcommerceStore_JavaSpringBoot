@@ -18,10 +18,10 @@ import java.util.List;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
 
-    public JwtFilter(JwtService jwtService)
-    {
-        this.jwtService=jwtService;
+    public JwtFilter(JwtService jwtService) {
+        this.jwtService = jwtService;
     }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -57,3 +57,4 @@ public class JwtFilter extends OncePerRequestFilter {
         // Step 7 — Continue to next filter/controller
         filterChain.doFilter(request, response);
     }
+}
