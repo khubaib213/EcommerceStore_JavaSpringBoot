@@ -1,8 +1,10 @@
 package com.example.ecommerce.service;
 
 
+import com.example.ecommerce.DTOs.LoginDTO;
 import com.example.ecommerce.DTOs.RegisterDTO;
 import com.example.ecommerce.entity.AuthUser;
+import com.example.ecommerce.exception.ResourceNotFoundException;
 import com.example.ecommerce.repository.AuthUserRepository;
 import com.example.ecommerce.security.JwtService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,6 +36,12 @@ public class AuthService {
         return jwtService.generateToken(request.getEmail());
     }
 
-
-
+    public String Login(LoginDTO request) {
+        AuthUser user = authUserRepository.findByEmail(request.getEmail()).orElseThrow(() -> new ResourceNotFoundException("User not found "));
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword()))
+        {
+            throw new RuntimeException("Password doesn't match");
+        }
+        return jwtService.generateToken(request.getEmail());
+    }
 }
