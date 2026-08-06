@@ -1,12 +1,12 @@
-package com.example.ecommerce.security;
+package com.example.ecommerce.service;
 
 
 import com.example.ecommerce.DTOs.RegisterDTO;
 import com.example.ecommerce.entity.AuthUser;
 import com.example.ecommerce.repository.AuthUserRepository;
+import com.example.ecommerce.security.JwtService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 @Service
 public class AuthService {
@@ -19,7 +19,7 @@ public class AuthService {
     {
         this.authUserRepository=authUserRepository;
         this.jwtService=jwtService;
-        this.[passwordEncoder=new BCryptPasswordEncoder();
+        this.passwordEncoder=new BCryptPasswordEncoder();
     }
 
     public String Register(RegisterDTO request)
