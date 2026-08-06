@@ -2,6 +2,6 @@ package com.example.ecommerce.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Tabl
+@Table(name = "auth_users")
 public class AuthUser {
 }
