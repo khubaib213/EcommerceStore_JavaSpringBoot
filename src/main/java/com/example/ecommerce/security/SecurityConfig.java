@@ -21,7 +21,7 @@ public class SecurityConfig {
         this.jwtFilter=jwtFilter;
     }
     @Bean
-    public SecurityFilterChain filerChain (HttpSecurity http)
+    public SecurityFilterChain filterChain  (HttpSecurity http) throws Exception
     {
         http
                 .csrf(csrf-> csrf.disable())
