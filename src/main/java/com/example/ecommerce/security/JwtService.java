@@ -34,12 +34,13 @@ public class JwtService {
         return getClaims(Token).getSubject();
     }
 
-    public boolean isTokenValid (String token)
-    {
-        try{
-            return getClaims(token).getExpiration().after(new Date());
-        }catch(Exception e)
-        {
+    public boolean isTokenValid(String token) {
+        try {
+            Claims claims = getClaims(token);
+            return claims.getExpiration().after(new Date());
+        } catch (Exception e) {
+            System.out.println("TOKEN ERROR: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }

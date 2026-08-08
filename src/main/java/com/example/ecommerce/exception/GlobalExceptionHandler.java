@@ -1,6 +1,5 @@
 package com.example.ecommerce.exception;
 
-import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,25 +14,27 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse>handleValidationErrors (MethodArgumentNotValidException ex)
-    {
+    public ResponseEntity<ErrorResponse> handleValidationErrors(
+            MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        for (FieldError error: ex.getBindingResult().getFieldErrors())
-        {
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(400, "Validation Failed", errors));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(400, "Validation Failed", errors));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse>handleResourceNotFound (ResourceNotFoundException ex)
-    {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(404, ex.getMessage(), null));
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse(404, ex.getMessage(), null));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse>handleValidationErrors (ValidationException ex)
-    {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(500,ex.getMessage(), null));
+    public ResponseEntity<ErrorResponse> handleGenericError(Exception ex) {
+        ex.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(500, "Something went wrong", null));
     }
 }
