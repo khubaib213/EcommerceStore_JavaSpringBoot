@@ -9,7 +9,7 @@ public class ProductDTO {
     private int stock;
     private String category;
 
-    public ProductDTO(){};
+    public ProductDTO(String name, String description, double price, int stock, String s){};
 
     public ProductDTO(int id, String name, String description, double price, int stock, String category)
     {
