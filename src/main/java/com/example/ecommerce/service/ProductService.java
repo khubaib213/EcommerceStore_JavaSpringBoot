@@ -88,4 +88,22 @@ public class ProductService {
         productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
         productRepository.deleteById(id);
     }
+
+    public List<ProductDTO> searchProducts(String keyword)
+    {
+        logger.info("Finding products with keyword:{}", keyword);
+        return productRepository.searchProducts(keyword)
+                .stream()
+                .map(this::ConvertToDTO)
+                .toList();
+    }
+
+    public List<ProductDTO> getByCategoryId(int categoryId)
+    {
+        logger.info("Getting Products by category ID: {}",categoryId);
+        return productRepository.findByCategoryId(categoryId)
+                .stream()
+                .map(this::ConvertToDTO)
+                .toList();
+    }
 }
