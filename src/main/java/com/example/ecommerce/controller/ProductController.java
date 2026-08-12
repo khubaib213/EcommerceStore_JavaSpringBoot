@@ -38,9 +38,28 @@ public class ProductController {
         return ResponseEntity.ok(productService.getByID(id));
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable int id, @Valid @RequestBody CreateProductDTO request)
     {
         return ResponseEntity.ok(productService.update(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete (@PathVariable int id)
+    {
+        productService.delete(id);
+        return ResponseEntity.ok("Product Deleted Sucesfully");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> search (@RequestParam String keyword)
+    {
+        return ResponseEntity.ok(productService.searchProducts(keyword));
+    }
+
+    @GetMapping("/category/{categoryid}")
+    public ResponseEntity<List<ProductDTO>> getByGategory(@PathVariable int categoryId)
+    {
+        return ResponseEntity.ok(productService.getByCategoryId(categoryId));
     }
 }
