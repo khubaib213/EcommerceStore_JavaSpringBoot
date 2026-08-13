@@ -27,11 +27,11 @@ public class Order {
 
     public Order() {
     }
-    public Order(int id, String status, int totalAmount)
+    public Order(String status, int totalAmount, AuthUser user)
     {
-        this.id=id;
         this.status=status;
         this.totalAmount=totalAmount;
+        this.user=user;
     }
 
     public void setId(int id) {
