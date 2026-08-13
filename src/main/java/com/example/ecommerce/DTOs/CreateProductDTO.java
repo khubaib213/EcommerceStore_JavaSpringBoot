@@ -19,17 +19,17 @@ public class CreateProductDTO {
     private int stock;
 
     @NotNull(message = "Category is required")
-    private Integer categoryID;
+    private Integer categoryId;
 
     public CreateProductDTO (){};
 
-    public CreateProductDTO(String name, String description, double price, int stock, Integer categoryID)
+    public CreateProductDTO(String name, String description, double price, int stock, Integer categoryId)
     {
         this.name=name;
         this.description=description;
         this.stock=stock;
         this.price=price;
-        this.categoryID=categoryID;
+        this.categoryId=categoryId;
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class CreateProductDTO {
     }
 
     public Integer getCategoryID() {
-        return categoryID;
+        return categoryId;
     }
 
     public void setName(String name) {
@@ -69,6 +69,6 @@ public class CreateProductDTO {
     }
 
     public void setCategoryID(Integer categoryID) {
-        this.categoryID = categoryID;
+        this.categoryId = categoryID;
     }
 }

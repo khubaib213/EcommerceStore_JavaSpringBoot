@@ -22,16 +22,17 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<ProductDTO> create(@Valid @RequestBody CreateProductDTO request) {
         return ResponseEntity.ok(productService.create(request));
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>>getAll()
     {
         return ResponseEntity.ok(productService.getAll());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getById(@PathVariable int id)
     {
