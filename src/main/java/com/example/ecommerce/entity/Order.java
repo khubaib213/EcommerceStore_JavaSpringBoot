@@ -3,6 +3,7 @@ package com.example.ecommerce.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +22,9 @@ public class Order {
     @JsonIgnoreProperties("orders")
     private AuthUser user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("order")
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order() {
     }
@@ -52,6 +53,10 @@ public class Order {
 
     public String getStatus() {
         return status;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
     public int getTotalAmount() {
