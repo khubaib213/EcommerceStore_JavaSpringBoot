@@ -115,4 +115,13 @@ public class OrderService {
 
         return convertToDTOWithItems(order, orderItems);
     }
+
+    public List<OrderDTO> getMyOrders (String userEmail)
+    {
+        logger.info("Fetching Order with email: {}", userEmail);
+        return orderRepository.findByEmail(userEmail)
+                .stream()
+                .map(this::convertToDTO)
+                .toList();
+    }
 }
