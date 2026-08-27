@@ -124,4 +124,11 @@ public class OrderService {
                 .map(this::convertToDTO)
                 .toList();
     }
+
+    public OrderDTO getOrderById (int userId)
+    {
+        logger.info("Fetching Orders with User ID: {}", userId);
+        Order order = orderRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("Order not found against id: "+userId));
+        return convertToDTO(order);
+    }
 }
