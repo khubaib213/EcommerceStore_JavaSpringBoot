@@ -55,6 +55,10 @@ public class Order {
         return status;
     }
 
+    public AuthUser getUser() {
+        return user;
+    }
+
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
