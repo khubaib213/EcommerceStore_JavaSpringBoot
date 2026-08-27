@@ -15,7 +15,7 @@ public class Order {
     private int id;
 
     private String status;
-    private int totalAmount;
+    private double totalAmount;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -28,7 +28,7 @@ public class Order {
 
     public Order() {
     }
-    public Order(String status, int totalAmount, AuthUser user)
+    public Order(String status, double totalAmount, AuthUser user)
     {
         this.status=status;
         this.totalAmount=totalAmount;
@@ -43,7 +43,7 @@ public class Order {
         this.status = status;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -61,6 +61,10 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public int getTotalAmount() {
