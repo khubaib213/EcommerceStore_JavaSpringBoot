@@ -3,6 +3,7 @@ package com.example.ecommerce.controller;
 
 import com.example.ecommerce.DTOs.OrderDTO;
 import com.example.ecommerce.DTOs.PlaceOrderDTO;
+import com.example.ecommerce.entity.AuthUser;
 import com.example.ecommerce.entity.Order;
 import com.example.ecommerce.service.OrderService;
 import jakarta.validation.Valid;
@@ -34,4 +35,16 @@ public class OrderController {
         return ResponseEntity.ok( orderService.getMyOrders(email));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDTO> getById(@PathVariable int id)
+    {
+        return ResponseEntity.ok(orderService.getOrderById(id));
+    }
+
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<OrderDTO> cancelOrder(
+            @PathVariable int id, @AuthenticationPrincipal String email)
+    {
+        return ResponseEntity.ok(orderService.CancelOrderById(id, email));
+    }
 }
