@@ -114,7 +114,7 @@ public class OrderService {
 
     public List<OrderDTO> getMyOrders(String userEmail) {
         logger.info("Fetching Order with email: {}", userEmail);
-        return orderRepository.findByEmail(userEmail)
+        return orderRepository.findByUser_Email(userEmail)
                 .stream()
                 .map(this::convertToDTO)
                 .toList();
@@ -134,23 +134,24 @@ public class OrderService {
             throw new RuntimeException("You can only cancel your own orders");
         }
 
-        if(order.getStatus().equals("CANCELLED"))
-        {
+        if (order.getStatus().equals("CANCELLED")) {
             throw new RuntimeException("Order already cancelled");
         }
 
         order.setStatus("CANCELLED");
+        List<OrderItem> items = orderItemRepository.findByOrderId(id);
+        for (OrderItem item : items) {
+            Product product = item.getProduct();
+            int restoredStock = product.getStock() + item.getQuantity();
+            product.setStock(restoredStock);
+            productRepository.save(product);
+            logger.info("Restored stock for {}: {} + {} = {}",
+                    product.getName(),
 
-        if(order.getOrderItems() != null)
-        {
-            for(OrderItem item: order.getOrderItems())
-            {
-                Product product = item.getProduct();
-                product.setStock(product.getStock() + item.getQuantity());
-                productRepository.save(product);
-            }
+                    product.getStock() - item.getQuantity(),
+                    item.getQuantity(),
+                    restoredStock);
         }
-
         return convertToDTO(orderRepository.save(order));
     }
 }
