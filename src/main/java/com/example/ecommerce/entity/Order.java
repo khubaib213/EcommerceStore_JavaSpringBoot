@@ -67,7 +67,7 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public int getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 }

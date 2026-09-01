@@ -42,8 +42,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<OrderDTO> cancelOrder(
-            @PathVariable int id, @AuthenticationPrincipal String email)
+    public ResponseEntity<OrderDTO> cancelOrder(@PathVariable int id, @AuthenticationPrincipal String email)
     {
         return ResponseEntity.ok(orderService.CancelOrderById(id, email));
     }
